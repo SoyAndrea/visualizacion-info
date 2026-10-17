@@ -1,0 +1,51 @@
+---
+title: "Trabajo Practico 1: El modelo de visualización de Ben Fry"
+subtitle: "Maestría en Generación y Análisis de Información Estadística - UNTREF"
+author: "Andrea Gomez Vargas"
+lang: es
+date: "10/22/2026"
+date-format: "DD/MM/YYYY"
+format:
+  pdf:
+    toc: TRUE
+    number-sections: false
+    colorlinks: true
+editor: visual
+---
+
+\newpage
+
+
+
+# El modelo de visualización de Ben Fry con datos del Registro Nacional de las Personas (RENAPER) 
+
+
+## Objetivo
+
+
+
+##  Acquire: Obtener los datos
+
+Personas que obtuvieron la nacionalidad argentina y realizaron su primer DNI, según tipo de nacionalidad, país de nacimiento y año de trámite (1 de enero de 2013 al 20 de agosto de 2025).
+
+
+
+URL: https://datos.gob.ar/dataset/poblacion-nacionalizada-en-argentina/resource/33ba92f4-36a2-5e63-8cb1-d0980bf92e3e
+
+
+```{r}
+pob_nacionalizada <- read.csv("data/pob_nacionalizada.csv")
+```
+
+
+
+## Parse: Estructurarlos para analizarlos
+
+## Filter: Seleccionar lo relevante
+
+##  Mine: Detectar patrones e insights
+
+## Represent: Elegir cómo visualizar
+
+
+## Refine: Mejorar la presentación
