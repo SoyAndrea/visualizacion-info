@@ -20,6 +20,9 @@ format:
     toc: true
     number-sections: false
     theme: cosmo
+    code-fold: true
+    code-summary: "Mostrar código"
+    code-tools: true
 editor: visual
 ---
 

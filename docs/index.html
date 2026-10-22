@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Trabajo Practico 1: El modelo de visualización de Ben Fry</h1>
+<div class="quarto-title-block"><div><h1 class="title">Trabajo Practico 1: El modelo de visualización de Ben Fry</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Código</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Mostrar todo el código</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Ocultar todo el código</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Ver el código fuente</a></li></ul></div></div>
 <p class="subtitle lead">Maestría en Generación y Análisis de Información Estadística - UNTREF</p>
 </div>
 
@@ -279,6 +279,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="obtener-acquire">1. Obtener (<em>Acquire</em>)</h3>
 <p>El dataset se obtiene desde el portal de datos abierto a través de la URL del recurso: <a href="https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv" class="uri">https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv</a></p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prepararo paquetes de trabajo</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -286,8 +288,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>renaper <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://datosabiertos.renaper.gob.ar/"</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cantidad_de_tramites_de_DNI_argentino_"</span>,</span>
@@ -298,6 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Lectura de composición del  dataset</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(pob_nacionalizada)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,974
 Columns: 4
@@ -313,6 +319,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <h3 class="anchored" data-anchor-id="estructurar-parse">2. Estructurar (<em>Parse</em>)</h3>
 <p>Se estandarizan los nombres de las variables, se ajusta el año a número entero y se recodifican las categorías para que sean legibles en el gráfico.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nac <span class="ot">&lt;-</span> pob_nacionalizada <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -328,17 +336,23 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.default =</span> pais</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                  )</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 </section>
 <section id="filtrar-filter" class="level3">
 <h3 class="anchored" data-anchor-id="filtrar-filter">3. Filtrar (<em>Filter</em>)</h3>
 <p>Se restringe el período a los años completos (2013–2024), excluyendo 2025 por contener datos solo hasta el 20 de agosto.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nac_periodo <span class="ot">&lt;-</span> nac <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(anio, <span class="dv">2013</span>, <span class="dv">2024</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <p>Para poder comparar los perfiles de origen según la vía de acceso, la selección se realiza por separado para carta de ciudadanía y para opción. Para cada vía se identifican los diez países con mayor cantidad de personas nacionalizadas en el período.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>datos_a <span class="ot">&lt;-</span> nac_periodo <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo, pais) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -349,6 +363,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(datos_a)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -465,6 +480,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 </div>
 <p>Para la serie temporal se toman los cinco primeros países de cada vía, y se arma su evolución anual. Los años sin registros se completan con cero para que las líneas no omitan esos años.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top5_tipo <span class="ot">&lt;-</span> datos_a <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(total, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
@@ -482,6 +499,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">anio =</span> <span class="dv">2013</span><span class="sc">:</span><span class="dv">2024</span>,</span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">cantidad =</span> <span class="dv">0</span>)</span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <p>Como resultado de esta etapa se obtienen dos conjuntos de datos: el primero reúne a los diez principales países de cada vía de acceso con su total del período; el segundo contiene la serie anual de los cinco principales países de cada vía.</p>
 </section>
@@ -491,6 +509,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <section id="cuánto-pesa-cada-vía-en-el-total" class="level4">
 <h4 class="anchored" data-anchor-id="cuánto-pesa-cada-vía-en-el-total">¿Cuánto pesa cada vía en el total?</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>totales_tipo <span class="ot">&lt;-</span> nac_periodo <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -502,6 +522,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>(total_tipo <span class="sc">/</span> <span class="fu">sum</span>(total_tipo) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>))</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(total)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -531,6 +552,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <section id="cómo-evolucionó-cada-vía-año-a-año" class="level4">
 <h4 class="anchored" data-anchor-id="cómo-evolucionó-cada-vía-año-a-año">¿Cómo evolucionó cada vía año a año?</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nac_periodo <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anio, tipo) <span class="sc">|&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -539,6 +562,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> tipo, <span class="at">values_from =</span> total) <span class="sc">|&gt;</span> </span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -618,6 +642,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <section id="qué-tan-concentradas-están-las-nacionalizaciones-en-cada-vía" class="level4">
 <h4 class="anchored" data-anchor-id="qué-tan-concentradas-están-las-nacionalizaciones-en-cada-vía">¿Qué tan concentradas están las nacionalizaciones en cada vía?</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>datos_a <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(totales_tipo, <span class="at">by =</span> <span class="st">"tipo"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
@@ -628,6 +654,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>total_tipo) <span class="sc">|&gt;</span> </span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -789,10 +816,13 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <section id="qué-países-aparecen-en-las-dos-vías" class="level4">
 <h4 class="anchored" data-anchor-id="qué-países-aparecen-en-las-dos-vías">¿Qué países aparecen en las dos vías?</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>datos_a <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(pais) <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -830,6 +860,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <li>Variaciones del primer al ultimo año de análisis</li>
 </ul>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2013</span>, <span class="dv">2024</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
@@ -839,6 +871,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var_pct =</span> <span class="fu">round</span>((a2024 <span class="sc">-</span> a2013) <span class="sc">/</span> a2013 <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -929,12 +962,15 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <li>Año de mayor impacto por país</li>
 </ul>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Año de máximo de cada país</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo, pais) <span class="sc">|&gt;</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(cantidad, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -1029,6 +1065,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <h4 class="anchored" data-anchor-id="diez-principales-países-por-vía-de-acceso-datos_a">Diez principales países por vía de acceso (<code>datos_a</code>)</h4>
 <p>Para comparar el total de personas nacionalizadas entre países se elige un gráfico de barras horizontales, facetado por vía de acceso a la nacionalidad. La longitud de la barra es la codificación más precisa para comparar cantidades, y la orientación horizontal facilita la lectura de nombres de países extensos. Ambos paneles comparten la escala de cantidades, lo que permite comparar los volúmenes entre vías de acceso.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_a, <span class="fu">aes</span>(total, pais)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> tipo, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
@@ -1038,6 +1076,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span>  <span class="st">"País de nacimiento"</span>,</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1052,6 +1091,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <p>Para mostrar la evolución en el tiempo se elabora un gráfico de líneas con puntos para cada vía de acceso a la nacionalidad: la línea muestra la tendencia y los puntos señalan el valor de cada año, lo que facilita identificar cambios puntuales. Se limita a los cinco principales países de cada vía porque con más series el gráfico se vuelve difícil de leer.</p>
 <p>A diferencia de las barras, donde los totales de ambas vías son comparables, en la serie los volúmenes anuales difieren mucho (Venezuela supera las 4.000 personas en carta de ciudadanía, mientras que en opción ningún país alcanza las 1.400). Por eso cada vía tiene su propia escala, y los valores se comparan dentro de cada vía y no entre ellas.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Carta de ciudadanía"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
@@ -1068,6 +1109,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"País de nacimiento"</span>,</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1077,6 +1119,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Opción"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
@@ -1093,6 +1137,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"País de nacimiento"</span>,</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1109,6 +1154,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <section id="diez-principales-países-por-vía-de-acceso-datos_a-1" class="level4">
 <h4 class="anchored" data-anchor-id="diez-principales-países-por-vía-de-acceso-datos_a-1">Diez principales países por vía de acceso (<code>datos_a</code>)</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>datos_a <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pais =</span> <span class="fu">reorder_within</span>(pais, total, tipo)) <span class="sc">|&gt;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(total, pais, <span class="at">fill =</span> tipo)) <span class="sc">+</span></span>
@@ -1128,6 +1175,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1140,6 +1188,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <section id="evolución-anual-de-los-cinco-principales-países-datos_b-1" class="level4">
 <h4 class="anchored" data-anchor-id="evolución-anual-de-los-cinco-principales-países-datos_b-1">Evolución anual de los cinco principales países (<code>datos_b</code>)</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Carta de ciudadanía"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
@@ -1162,6 +1212,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1171,6 +1222,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Mostrar código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Opción"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
@@ -1192,6 +1245,7 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
 <span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
 <span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1233,6 +1287,8 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
 <h3 class="anchored" data-anchor-id="software">Software</h3>
 <p>R Core Team. (2025). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. https://www.R-project.org/</p>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -1309,6 +1365,57 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1638,7 +1745,521 @@ $ cantidad          &lt;dbl&gt; 1, 1, 2, 1, 2, 2, 1, 4, 5, 8, 5, 5, 7, 6, 4, 2, 
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Trabajo Practico 1: El modelo de visualización de Ben Fry"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Maestría en Generación y Análisis de Información Estadística - UNTREF"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"> - name: "Andrea Gomez Vargas"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">   orcid: "0009-0007-8745-3967"</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/22/2026"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> "DD/MM/YYYY"</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: TRUE</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">    colorlinks: false</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{fvextra}</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Mostrar código"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>\newpage</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nuevos argentinos: un análisis de las nacionalizaciones en Argentina, años 2013–2024</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción: la nacionalización en Argentina</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>La nacionalización es un proceso voluntario por el cual una persona nacida en el extranjero adquiere la nacionalidad argentina y, con ella, la pertenencia jurídico-política a la nación. Está regida por la Ley N° 346 de Ciudadanía y Naturalización (1869) y su decreto reglamentario N° 3213/1984 (actualizado por última vez en 2004). Bajo este marco existen dos vías de acceso: la carta de ciudadanía, habitualmente conocida como "naturalización", y la opción.</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### Nacionalización por carta de ciudadanía</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>Es la vía por la cual la población extranjera residente en Argentina puede adquirir la nacionalidad. Se trata de un procedimiento judicial que la persona inicia voluntariamente y que culmina con el otorgamiento de la carta de ciudadanía. Una vez obtenida, la persona debe tramitar ante el Registro Nacional de las Personas (RENAPER) su primer Documento Nacional de Identidad (DNI) como argentina.</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Nacionalización por opción</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>Corresponde a personas nacidas en el extranjero que son hijas de padre o madre argentino nativo. Es un trámite administrativo que se realiza en los consulados argentinos, si la persona reside fuera del país, o en las oficinas del RENAPER y los registros civiles, si se encuentra en Argentina.</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>La distinción entre ambas vías es relevante para el análisis: la carta de ciudadanía refleja trayectorias de inmigración y residencia en el país, mientras que la opción expresa vínculos de filiación con la población argentina, incluida la emigrada.</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pregunta de interés</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; ¿Desde qué países de origen y por qué vía de acceso (carta de ciudadanía u opción) se nacionalizaron las personas en Argentina entre 2013 y 2024, y cómo evolucionaron los principales orígenes en ese período?</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>La pregunta busca identificar qué países concentran las nacionalizaciones, si esa composición difiere según la vía de acceso y cómo cambiaron a lo largo del tiempo los cinco principales países de origen.</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fuente de datos</span></span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>Se utiliza la base *Población nacionalizada en Argentina*, elaborada por la Dirección Nacional de Población a partir de los registros administrativos del RENAPER y publicada en el portal de datos abiertos del Estado nacional:</span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dataset: <span class="ot">&lt;https://datos.gob.ar/dataset/poblacion-nacionalizada-en-argentina&gt;</span></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Página de referencia: <span class="ot">&lt;https://www.argentina.gob.ar/interior/renaper/estadistica-de-poblacion&gt;</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>La base contiene la cantidad de personas que obtuvieron la nacionalidad argentina y realizaron su primer DNI, según tipo de nacionalización, país de nacimiento y año de trámite, entre el 1 de enero de 2013 y el 20 de agosto de 2025.</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>El registro se apoya en el proceso de digitalización de la identificación de personas iniciado con el Decreto N° 1501/2009, que estableció la emisión digital del DNI para ciudadanos nacionales y extranjeros (Resoluciones RENAPER N° 1800/2009 y N° 585/2012).</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unidad de análisis y periodo</span></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>Personas nacionalizadas que realizaron, entre el 1 de enero de 2013 y el 31 de diciembre de 2024, el trámite de su primer DNI como argentinas ante el RENAPER.</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Alcances y limitaciones</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cobertura del registro.** Solo se contabilizan personas que tramitaron su primer DNI digital como argentinas. Quedan excluidas quienes tienen documentos confeccionados manualmente (Libreta Cívica, Libreta de Enrolamiento, DNI tapa verde o bordó) y quienes tramitaron el DNI digital fuera del período.</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Fecha de referencia.** El año corresponde al trámite del primer DNI, no a la fecha de otorgamiento de la nacionalidad. Puede haber un desfasaje entre ambos momentos, especialmente en la vía judicial.</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Nacionalizaciones sin DNI.** Las personas que obtuvieron la nacionalidad pero no tramitaron su primer DNI argentino no aparecen en la base.</span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Período analizado.** Aunque la base llega hasta el 20 de agosto de 2025, se excluye ese año por contener datos parciales, para trabajar solo con años completos y comparables.</span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelo de visualización de Ben Fry</span></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>Ben Fry (2008) propone siete etapas para desarrollar una visualización de datos: obtener, estructurar, filtrar, explorar, representar, refinar e interactuar. Este trabajo desarrolla las seis primeras; la última (*Interact*) queda fuera porque el producto final es una visualización estática.</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Obtener (*Acquire*)</span></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>El dataset se obtiene desde el portal de datos abierto a través de la URL del recurso: <span class="ot">&lt;https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv&gt;</span></span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="co"># prepararo paquetes de trabajo</span></span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-overflow: wrap</span></span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>renaper <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://datosabiertos.renaper.gob.ar/"</span>,</span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cantidad_de_tramites_de_DNI_argentino_"</span>,</span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>  <span class="st">"por_nacionalidad_pais_anio.csv"</span></span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>pob_nacionalizada <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(renaper, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a><span class="do">## Lectura de composición del  dataset</span></span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(pob_nacionalizada)</span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>La base cuenta con 1.974 observaciones y 4 variables: país de nacimiento (<span class="in">`pais_nac`</span>), vía de acceso a la nacionalidad (<span class="in">`Tipo_nacionalidad`</span>) con las categorías CARTA y OPCION, año de trámite del primer DNI (<span class="in">`anio`</span>) y cantidad de personas nacionalizadas (<span class="in">`cantidad`</span>). Cada fila corresponde a una combinación de país, vía de acceso y año; las combinaciones sin casos no figuran en la base.</span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Estructurar (*Parse*)</span></span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>Se estandarizan los nombres de las variables, se ajusta el año a número entero y se recodifican las categorías para que sean legibles en el gráfico.</span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: parse</span></span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a>nac <span class="ot">&lt;-</span> pob_nacionalizada <span class="sc">|&gt;</span></span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>    <span class="at">anio =</span> <span class="fu">as.integer</span>(anio),</span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a>    <span class="at">tipo =</span> <span class="fu">recode</span>(tipo_nacionalidad,</span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"CARTA"</span>  <span class="ot">=</span> <span class="st">"Carta de ciudadanía"</span>,</span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"OPCION"</span> <span class="ot">=</span> <span class="st">"Opción"</span>),</span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">pais =</span> <span class="fu">str_to_title</span>(pais_nac),</span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">pais =</span> <span class="fu">case_when</span>(</span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>                    pais <span class="sc">==</span> <span class="st">"Peru"</span> <span class="sc">~</span> <span class="st">"Perú"</span>,</span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a>                    pais <span class="sc">==</span> <span class="st">"Mexico"</span> <span class="sc">~</span> <span class="st">"México"</span>,</span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a>                    pais <span class="sc">==</span> <span class="st">"Republica Dominicana"</span> <span class="sc">~</span> <span class="st">"República Dominicana"</span>,</span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.default =</span> pais</span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Filtrar (*Filter*)</span></span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>Se restringe el período a los años completos (2013–2024), excluyendo 2025 por contener datos solo hasta el 20 de agosto.</span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter-periodo</span></span>
+<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a>nac_periodo <span class="ot">&lt;-</span> nac <span class="sc">|&gt;</span></span>
+<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(anio, <span class="dv">2013</span>, <span class="dv">2024</span>))</span>
+<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a>Para poder comparar los perfiles de origen según la vía de acceso, la selección se realiza por separado para carta de ciudadanía y para opción. Para cada vía se identifican los diez países con mayor cantidad de personas nacionalizadas en el período.</span>
+<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter-datos-a</span></span>
+<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a>datos_a <span class="ot">&lt;-</span> nac_periodo <span class="sc">|&gt;</span></span>
+<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo, pais) <span class="sc">|&gt;</span></span>
+<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(cantidad),</span>
+<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop_last"</span></span>
+<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(total, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(datos_a)</span>
+<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a>Para la serie temporal se toman los cinco primeros países de cada vía, y se arma su evolución anual. Los años sin registros se completan con cero para que las líneas no omitan esos años.</span>
+<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter-datos-b</span></span>
+<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a>top5_tipo <span class="ot">&lt;-</span> datos_a <span class="sc">|&gt;</span></span>
+<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
+<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(total, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a>datos_b <span class="ot">&lt;-</span> nac_periodo <span class="sc">|&gt;</span></span>
+<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(top5_tipo, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tipo"</span>, <span class="st">"pais"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo, pais, anio) <span class="sc">|&gt;</span></span>
+<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a>    <span class="at">cantidad =</span> <span class="fu">sum</span>(cantidad),</span>
+<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(</span>
+<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nesting</span>(tipo, pais),</span>
+<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a>    <span class="at">anio =</span> <span class="dv">2013</span><span class="sc">:</span><span class="dv">2024</span>,</span>
+<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">cantidad =</span> <span class="dv">0</span>)</span>
+<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a>Como resultado de esta etapa se obtienen dos conjuntos de datos: el primero reúne a los diez principales países de cada vía de acceso con su total del período; el segundo contiene la serie anual de los cinco principales países de cada vía.</span>
+<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. Explorar (*Mine*)</span></span>
+<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a>En esta etapa se calculan medidas para identificar patrones antes de graficar: el volumen de cada vía de acceso, su evolución anual, el grado de concentración en pocos países, la coincidencia entre los rankings de ambas vías y la evolución de los principales países.</span>
+<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a><span class="fu">#### ¿Cuánto pesa cada vía en el total?</span></span>
+<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mine-total-tipo</span></span>
+<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a>totales_tipo <span class="ot">&lt;-</span> nac_periodo <span class="sc">|&gt;</span></span>
+<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
+<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_tipo =</span> <span class="fu">sum</span>(cantidad),</span>
+<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> totales_tipo <span class="sc">|&gt;</span></span>
+<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>(total_tipo <span class="sc">/</span> <span class="fu">sum</span>(total_tipo) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>))</span>
+<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(total)</span>
+<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a>Las dos vías tienen volúmenes comparables: la carta de ciudadanía reúne 59.019 personas (54,2%) y la opción 49.899 (45,8%).</span>
+<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a><span class="fu">#### ¿Cómo evolucionó cada vía año a año?</span></span>
+<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mine-evolucion-tipo</span></span>
+<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a>nac_periodo <span class="sc">|&gt;</span></span>
+<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anio, tipo) <span class="sc">|&gt;</span></span>
+<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(cantidad),</span>
+<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> tipo, <span class="at">values_from =</span> total) <span class="sc">|&gt;</span> </span>
+<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
+<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a>Entre 2013 y 2019 ambas vías se mantienen estables, en torno a 4.000–4.800 personas por año. En 2020 caen a alrededor de un tercio, en coincidencia con la pandemia. A partir de 2022 la recuperación es marcada: en 2024 la carta de ciudadanía prácticamente duplica su nivel de 2013 (9.248 frente a 4.655), mientras que la opción crece un 34%.</span>
+<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a><span class="fu">#### ¿Qué tan concentradas están las nacionalizaciones en cada vía?</span></span>
+<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mine-concentracion</span></span>
+<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a>datos_a <span class="sc">|&gt;</span></span>
+<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(totales_tipo, <span class="at">by =</span> <span class="st">"tipo"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
+<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct      =</span> <span class="fu">round</span>(total <span class="sc">/</span> total_tipo <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_acum =</span> <span class="fu">cumsum</span>(pct)</span>
+<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>total_tipo) <span class="sc">|&gt;</span> </span>
+<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
+<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a>La carta de ciudadanía está más concentrada: sus diez principales países reúnen el 84,5% del total de la vía, y los tres primeros casi la mitad. En opción, los diez principales reúnen el 72,6%.El porcentaje se calcula sobre el total de cada vía, con todos los países. La última fila de cada vía indica cuánto concentran sus diez principales países</span>
+<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a><span class="fu">#### ¿Qué países aparecen en las dos vías?</span></span>
+<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mine-coincidencias</span></span>
+<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a>datos_a <span class="sc">|&gt;</span></span>
+<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(pais) <span class="sc">|&gt;</span></span>
+<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
+<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a>Solo cuatro países figuran entre los diez principales de ambas vías: Bolivia, Chile, Paraguay y Venezuela, todos sudamericanos. El resto de los rankings es distinto: en carta predominan países latinoamericanos y del Caribe, y en opción aparecen España, Estados Unidos, México, Italia e Israel.</span>
+<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a><span class="fu">#### ¿Cómo evolucionaron los cinco principales de cada vía?</span></span>
+<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Variaciones del primer al ultimo año de análisis</span>
+<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mine-variacion</span></span>
+<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span></span>
+<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2013</span>, <span class="dv">2024</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> anio,</span>
+<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> cantidad,</span>
+<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"a"</span></span>
+<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var_pct =</span> <span class="fu">round</span>((a2024 <span class="sc">-</span> a2013) <span class="sc">/</span> a2013 <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
+<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Año de mayor impacto por país</span>
+<span id="cb20-307"><a href="#cb20-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="co"># Año de máximo de cada país</span></span>
+<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span></span>
+<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tipo, pais) <span class="sc">|&gt;</span></span>
+<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(cantidad, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
+<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a>En carta de ciudadanía, Venezuela pasa de 19 personas en 2013 a 4.411 en 2024, casi la mitad de todas las cartas de ese año. En cambio, Perú y Paraguay disminuyen (-26% y -49%) y Bolivia se mantiene estable. En opción, Estados Unidos y Chile más que duplican sus valores, mientras que España, aunque sigue primera, desciende un 21% respecto de 2013.</span>
+<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Hallazgos principales:</span></span>
+<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Las dos vías de acceso a la nacionalidad argentina tienen un peso similar, pero perfiles de origen distintos: solo cuatro países coinciden en sus rankings.</span>
+<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La nacionalización por carta de ciudadanía se concentra en países latinoamericanos y del Caribe; mientras que la nacionalización por opción incluye además países con presencia de población argentina emigrada.</span>
+<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La pandemia produjo una caída abrupta en 2020, seguida de un crecimiento sostenido hasta 2024.</span>
+<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El crecimiento reciente de la carta de ciudadanía se explica principalmente por la migración desde Venezuela, que reemplaza a Perú y Bolivia como principal país de origen.</span>
+<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Representar (*Represent*)</span></span>
+<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>La visualización se compone de tres gráficos construidos a partir de los dos conjuntos de datos definidos en la etapa de filtrado. El primero, elaborado con <span class="in">`datos_a`</span>, compara los diez principales países de nacimiento en cada vía de acceso a la nacionalidad. Los otros dos, elaborados con <span class="in">`datos_b`</span>, muestran la evolución anual de los cinco principales países, uno para la carta de ciudadanía y otro para la opción.</span>
+<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Diez principales países por vía de acceso (`datos_a`)</span></span>
+<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a>Para comparar el total de personas nacionalizadas entre países se elige un gráfico de barras horizontales, facetado por vía de acceso a la nacionalidad. La longitud de la barra es la codificación más precisa para comparar cantidades, y la orientación horizontal facilita la lectura de nombres de países extensos. Ambos paneles comparten la escala de cantidades, lo que permite comparar los volúmenes entre vías de acceso.</span>
+<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: represent-barras</span></span>
+<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_a, <span class="fu">aes</span>(total, pais)) <span class="sc">+</span></span>
+<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> tipo, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Personas nacionalizadas según país de nacimiento y tipo de nacionalización. Argentina, 2013–2024"</span>,</span>
+<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Personas nacionalizadas"</span>,</span>
+<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span>  <span class="st">"País de nacimiento"</span>,</span>
+<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
+<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Evolución anual de los cinco principales países (`datos_b`)</span></span>
+<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a>Para mostrar la evolución en el tiempo se elabora un gráfico de líneas con puntos para cada vía de acceso a la nacionalidad: la línea muestra la tendencia y los puntos señalan el valor de cada año, lo que facilita identificar cambios puntuales. Se limita a los cinco principales países de cada vía porque con más series el gráfico se vuelve difícil de leer.</span>
+<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a>A diferencia de las barras, donde los totales de ambas vías son comparables, en la serie los volúmenes anuales difieren mucho (Venezuela supera las 4.000 personas en carta de ciudadanía, mientras que en opción ningún país alcanza las 1.400). Por eso cada vía tiene su propia escala, y los valores se comparan dentro de cada vía y no entre ellas.</span>
+<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: represent-serie1</span></span>
+<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb20-369"><a href="#cb20-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-370"><a href="#cb20-370" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
+<span id="cb20-371"><a href="#cb20-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Carta de ciudadanía"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-372"><a href="#cb20-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
+<span id="cb20-373"><a href="#cb20-373" aria-hidden="true" tabindex="-1"></a>             cantidad, </span>
+<span id="cb20-374"><a href="#cb20-374" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> pais,</span>
+<span id="cb20-375"><a href="#cb20-375" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> pais)) <span class="sc">+</span></span>
+<span id="cb20-376"><a href="#cb20-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-377"><a href="#cb20-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-378"><a href="#cb20-378" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb20-379"><a href="#cb20-379" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Personas nacionalizadas por carta de ciudadanía según país de nacimiento"</span>,</span>
+<span id="cb20-380"><a href="#cb20-380" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"Cinco principales países. Argentina, 2013–2024"</span>,</span>
+<span id="cb20-381"><a href="#cb20-381" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Personas nacionalizadas"</span>,</span>
+<span id="cb20-382"><a href="#cb20-382" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span>  <span class="st">"Año de trámite primer DNI"</span>,</span>
+<span id="cb20-383"><a href="#cb20-383" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"País de nacimiento"</span>,</span>
+<span id="cb20-384"><a href="#cb20-384" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
+<span id="cb20-385"><a href="#cb20-385" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-386"><a href="#cb20-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-387"><a href="#cb20-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-388"><a href="#cb20-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-391"><a href="#cb20-391" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-392"><a href="#cb20-392" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: represent-serie2</span></span>
+<span id="cb20-393"><a href="#cb20-393" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb20-394"><a href="#cb20-394" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb20-395"><a href="#cb20-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-396"><a href="#cb20-396" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
+<span id="cb20-397"><a href="#cb20-397" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Opción"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-398"><a href="#cb20-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
+<span id="cb20-399"><a href="#cb20-399" aria-hidden="true" tabindex="-1"></a>             cantidad, </span>
+<span id="cb20-400"><a href="#cb20-400" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> pais,</span>
+<span id="cb20-401"><a href="#cb20-401" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> pais)) <span class="sc">+</span></span>
+<span id="cb20-402"><a href="#cb20-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-403"><a href="#cb20-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-404"><a href="#cb20-404" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-405"><a href="#cb20-405" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Personas nacionalizadas por opción según país de nacimiento"</span>,</span>
+<span id="cb20-406"><a href="#cb20-406" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Cinco principales países. Argentina, 2013–2024"</span>,</span>
+<span id="cb20-407"><a href="#cb20-407" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Personas nacionalizadas"</span>,</span>
+<span id="cb20-408"><a href="#cb20-408" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span>  <span class="st">"Año de trámite primer DNI"</span>,</span>
+<span id="cb20-409"><a href="#cb20-409" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"País de nacimiento"</span>,</span>
+<span id="cb20-410"><a href="#cb20-410" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
+<span id="cb20-411"><a href="#cb20-411" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-412"><a href="#cb20-412" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-413"><a href="#cb20-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-414"><a href="#cb20-414" aria-hidden="true" tabindex="-1"></a>Estas versiones base permiten identificar los aspectos a mejorar en la etapa siguiente: themes, paleta de colores, escalas de los ejes, entre otros.</span>
+<span id="cb20-415"><a href="#cb20-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-416"><a href="#cb20-416" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. Refinar (*Refine*)</span></span>
+<span id="cb20-417"><a href="#cb20-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-418"><a href="#cb20-418" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Diez principales países por vía de acceso (`datos_a`)</span></span>
+<span id="cb20-419"><a href="#cb20-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-422"><a href="#cb20-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-423"><a href="#cb20-423" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: refine-barras</span></span>
+<span id="cb20-424"><a href="#cb20-424" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb20-425"><a href="#cb20-425" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb20-426"><a href="#cb20-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-427"><a href="#cb20-427" aria-hidden="true" tabindex="-1"></a>datos_a <span class="sc">|&gt;</span></span>
+<span id="cb20-428"><a href="#cb20-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pais =</span> <span class="fu">reorder_within</span>(pais, total, tipo)) <span class="sc">|&gt;</span></span>
+<span id="cb20-429"><a href="#cb20-429" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(total, pais, <span class="at">fill =</span> tipo)) <span class="sc">+</span></span>
+<span id="cb20-430"><a href="#cb20-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb20-431"><a href="#cb20-431" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(</span>
+<span id="cb20-432"><a href="#cb20-432" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">number</span>(total, <span class="at">big.mark =</span> <span class="st">"."</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>), <span class="at">color =</span> tipo),</span>
+<span id="cb20-433"><a href="#cb20-433" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fl">1.1</span>,</span>
+<span id="cb20-434"><a href="#cb20-434" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb20-435"><a href="#cb20-435" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>() <span class="sc">+</span></span>
+<span id="cb20-436"><a href="#cb20-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#003049"</span>, <span class="st">"#669BBC"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb20-437"><a href="#cb20-437" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb20-438"><a href="#cb20-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> tipo, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb20-439"><a href="#cb20-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-440"><a href="#cb20-440" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Personas nacionalizadas según país de nacimiento y tipo de nacionalización. Argentina, 2013–2024"</span>,</span>
+<span id="cb20-441"><a href="#cb20-441" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Personas nacionalizadas"</span>,</span>
+<span id="cb20-442"><a href="#cb20-442" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span>  <span class="st">"País de nacimiento"</span>,</span>
+<span id="cb20-443"><a href="#cb20-443" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
+<span id="cb20-444"><a href="#cb20-444" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-445"><a href="#cb20-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb20-446"><a href="#cb20-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-447"><a href="#cb20-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-448"><a href="#cb20-448" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Evolución anual de los cinco principales países (`datos_b`)</span></span>
+<span id="cb20-449"><a href="#cb20-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-452"><a href="#cb20-452" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-453"><a href="#cb20-453" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: serie-ciudadania</span></span>
+<span id="cb20-454"><a href="#cb20-454" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb20-455"><a href="#cb20-455" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb20-456"><a href="#cb20-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-457"><a href="#cb20-457" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
+<span id="cb20-458"><a href="#cb20-458" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Carta de ciudadanía"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-459"><a href="#cb20-459" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
+<span id="cb20-460"><a href="#cb20-460" aria-hidden="true" tabindex="-1"></a>             cantidad, </span>
+<span id="cb20-461"><a href="#cb20-461" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> pais,</span>
+<span id="cb20-462"><a href="#cb20-462" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> pais)) <span class="sc">+</span></span>
+<span id="cb20-463"><a href="#cb20-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-464"><a href="#cb20-464" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-465"><a href="#cb20-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5000</span>)) <span class="sc">+</span> </span>
+<span id="cb20-466"><a href="#cb20-466" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb20-467"><a href="#cb20-467" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb20-468"><a href="#cb20-468" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Personas nacionalizadas por carta de ciudadanía según país de nacimiento"</span>,</span>
+<span id="cb20-469"><a href="#cb20-469" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"Cinco principales países. Argentina, 2013–2024"</span>,</span>
+<span id="cb20-470"><a href="#cb20-470" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Personas nacionalizadas"</span>,</span>
+<span id="cb20-471"><a href="#cb20-471" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span>  <span class="st">"Año de trámite primer DNI"</span>,</span>
+<span id="cb20-472"><a href="#cb20-472" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"País de nacimiento"</span>,</span>
+<span id="cb20-473"><a href="#cb20-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span></span>
+<span id="cb20-474"><a href="#cb20-474" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-475"><a href="#cb20-475" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb20-476"><a href="#cb20-476" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb20-477"><a href="#cb20-477" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb20-478"><a href="#cb20-478" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-479"><a href="#cb20-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-480"><a href="#cb20-480" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-481"><a href="#cb20-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-484"><a href="#cb20-484" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-485"><a href="#cb20-485" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: serie-opcion</span></span>
+<span id="cb20-486"><a href="#cb20-486" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb20-487"><a href="#cb20-487" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb20-488"><a href="#cb20-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-489"><a href="#cb20-489" aria-hidden="true" tabindex="-1"></a>datos_b <span class="sc">|&gt;</span> </span>
+<span id="cb20-490"><a href="#cb20-490" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tipo <span class="sc">==</span> <span class="st">"Opción"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-491"><a href="#cb20-491" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as.factor</span>(anio), </span>
+<span id="cb20-492"><a href="#cb20-492" aria-hidden="true" tabindex="-1"></a>             cantidad, </span>
+<span id="cb20-493"><a href="#cb20-493" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> pais,</span>
+<span id="cb20-494"><a href="#cb20-494" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> pais)) <span class="sc">+</span></span>
+<span id="cb20-495"><a href="#cb20-495" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-496"><a href="#cb20-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-497"><a href="#cb20-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>)) <span class="sc">+</span> </span>
+<span id="cb20-498"><a href="#cb20-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb20-499"><a href="#cb20-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-500"><a href="#cb20-500" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Personas nacionalizadas por opción según país de nacimiento"</span>,</span>
+<span id="cb20-501"><a href="#cb20-501" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Cinco principales países. Argentina, 2013–2024"</span>,</span>
+<span id="cb20-502"><a href="#cb20-502" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Personas nacionalizadas"</span>,</span>
+<span id="cb20-503"><a href="#cb20-503" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span>  <span class="st">"Año de trámite primer DNI"</span>,</span>
+<span id="cb20-504"><a href="#cb20-504" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"País de nacimiento"</span>,</span>
+<span id="cb20-505"><a href="#cb20-505" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."</span>) <span class="sc">+</span></span>
+<span id="cb20-506"><a href="#cb20-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb20-507"><a href="#cb20-507" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb20-508"><a href="#cb20-508" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb20-509"><a href="#cb20-509" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-510"><a href="#cb20-510" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-511"><a href="#cb20-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-512"><a href="#cb20-512" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusiones</span></span>
+<span id="cb20-513"><a href="#cb20-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-514"><a href="#cb20-514" aria-hidden="true" tabindex="-1"></a>El análisis visual permite responder la pregunta planteada: entre 2013 y 2024, las personas que se nacionalizaron en Argentina provienen de orígenes distintos según la vía de acceso a la nacionalidad, y la composición de esos orígenes cambió de forma marcada a partir de la pandemia de COVID-19.</span>
+<span id="cb20-515"><a href="#cb20-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-516"><a href="#cb20-516" aria-hidden="true" tabindex="-1"></a>En el período analizado, 108.918 personas realizaron su primer DNI como argentinas. Ambas vías tienen un peso similar en ese total, pero sus perfiles de origen difieren: solo Bolivia, Chile, Paraguay y Venezuela figuran entre los diez principales países de las dos vías. La carta de ciudadanía se concentra en países latinoamericanos y del Caribe, con Venezuela, Perú y Bolivia a la cabeza, mientras que la opción, encabezada por España y Estados Unidos, presenta una distribución más diversificada, con países como México, Italia e Israel.</span>
+<span id="cb20-517"><a href="#cb20-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-518"><a href="#cb20-518" aria-hidden="true" tabindex="-1"></a>En cuanto a la evolución temporal, ambas vías se mantienen estables entre 2013 y 2019, caen abruptamente en 2020, probablemente por la interrupción de trámites presenciales durante la pandemia, y se recuperan con fuerza a partir de 2021. Ese crecimiento reciente se explica principalmente por Venezuela en la carta de ciudadanía, que pasa de 19 personas en 2013 a 4.411 en 2024, mientras disminuyen orígenes tradicionales como Perú y Paraguay. En la opción crecen Estados Unidos y Chile, y España, aunque se mantiene como principal origen, desciende.</span>
+<span id="cb20-519"><a href="#cb20-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-520"><a href="#cb20-520" aria-hidden="true" tabindex="-1"></a>Estas diferencias son consistentes con la naturaleza de cada vía: la carta de ciudadanía refleja trayectorias de inmigración y residencia en el país, mientras que la opción expresa en mayor medida vínculos de filiación con la población argentina, incluida la emigrada. Sin embargo, la presencia de países limítrofes en ambas vías muestra que la distinción no es tajante y que la movilidad regional también se expresa a través de la opción. Al mismo tiempo, los cambios observados recuerdan que los fenómenos migratorios son dinámicos y responden a contextos internacionales demográficos, sociales, económicos y políticos, como lo muestran el crecimiento de la población venezolana, la presencia de orígenes como Senegal o Rusia y los destinos de la emigración argentina que se reflejan en la opción. Comprender la evolución de las nacionalizaciones requiere, por lo tanto, situarla en esos contextos.</span>
+<span id="cb20-521"><a href="#cb20-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-522"><a href="#cb20-522" aria-hidden="true" tabindex="-1"></a><span class="fu">## Referencias</span></span>
+<span id="cb20-523"><a href="#cb20-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-524"><a href="#cb20-524" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bibliografía</span></span>
+<span id="cb20-525"><a href="#cb20-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-526"><a href="#cb20-526" aria-hidden="true" tabindex="-1"></a>Fry, B. (2008). *Visualizing Data: Exploring and Explaining Data with the Processing Environment*. O'Reilly Media.</span>
+<span id="cb20-527"><a href="#cb20-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-528"><a href="#cb20-528" aria-hidden="true" tabindex="-1"></a><span class="fu">### Normativa</span></span>
+<span id="cb20-529"><a href="#cb20-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-530"><a href="#cb20-530" aria-hidden="true" tabindex="-1"></a>Ley N° 346 de Ciudadanía y Naturalización. (1869). República Argentina.</span>
+<span id="cb20-531"><a href="#cb20-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-532"><a href="#cb20-532" aria-hidden="true" tabindex="-1"></a>Decreto N° 3213/1984. Reglamentación de la Ley N° 346. República Argentina.</span>
+<span id="cb20-533"><a href="#cb20-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-534"><a href="#cb20-534" aria-hidden="true" tabindex="-1"></a>Decreto N° 1501/2009. República Argentina.</span>
+<span id="cb20-535"><a href="#cb20-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-536"><a href="#cb20-536" aria-hidden="true" tabindex="-1"></a>Registro Nacional de las Personas. Resolución N° 1800/2009.</span>
+<span id="cb20-537"><a href="#cb20-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-538"><a href="#cb20-538" aria-hidden="true" tabindex="-1"></a>Registro Nacional de las Personas. Resolución N° 585/2012.</span>
+<span id="cb20-539"><a href="#cb20-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-540"><a href="#cb20-540" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fuentes de datos</span></span>
+<span id="cb20-541"><a href="#cb20-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-542"><a href="#cb20-542" aria-hidden="true" tabindex="-1"></a>Registro Nacional de las Personas (RENAPER). (s. f.). *Cantidad de trámites de DNI argentino por nacionalidad, país y año* <span class="sc">\[</span>Conjunto de datos<span class="sc">\]</span>. Portal de datos abiertos del RENAPER. Recuperado el 20 de octubre de 2026, de https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv</span>
+<span id="cb20-543"><a href="#cb20-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-544"><a href="#cb20-544" aria-hidden="true" tabindex="-1"></a>Registro Nacional de las Personas (RENAPER). (s. f.). *Estadística de población*. https://www.argentina.gob.ar/interior/renaper/estadistica-de-poblacion</span>
+<span id="cb20-545"><a href="#cb20-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-546"><a href="#cb20-546" aria-hidden="true" tabindex="-1"></a><span class="fu">### Software</span></span>
+<span id="cb20-547"><a href="#cb20-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-548"><a href="#cb20-548" aria-hidden="true" tabindex="-1"></a>R Core Team. (2025). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. https://www.R-project.org/</span>
+</code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
