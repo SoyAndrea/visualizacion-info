@@ -1,0 +1,21 @@
+project:
+  type: website
+
+website:
+  title: "Visualización de la Información"
+  
+  navbar:
+    background: "#604ec2"
+    left:
+      - text: "Trabajo práctico 1"
+        href: index.qmd
+    right:
+      - icon: github
+        href: https://github.com/SoyAndrea/visualizacion-info
+        aria-label: GitHub
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-overflow: wrap

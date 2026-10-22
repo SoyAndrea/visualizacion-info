@@ -1,7 +1,9 @@
 ---
 title: "Trabajo Practico 1: El modelo de visualización de Ben Fry"
 subtitle: "Maestría en Generación y Análisis de Información Estadística - UNTREF"
-author: "Andrea Gomez Vargas"
+author: 
+ - name: "Andrea Gomez Vargas"
+   orcid: "0009-0007-8745-3967"
 lang: es
 date: "10/22/2026"
 date-format: "DD/MM/YYYY"
@@ -9,7 +11,11 @@ format:
   pdf:
     toc: TRUE
     number-sections: false
-    colorlinks: true
+    colorlinks: false
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
   html:
     toc: true
     number-sections: false
@@ -19,12 +25,9 @@ editor: visual
 
 \newpage
 
-
 # Nuevos argentinos: un análisis de las nacionalizaciones en Argentina, años 2013–2024
 
-
-
-## Introducción: la nacionalización en Argentina 
+## Introducción: la nacionalización en Argentina
 
 La nacionalización es un proceso voluntario por el cual una persona nacida en el extranjero adquiere la nacionalidad argentina y, con ella, la pertenencia jurídico-política a la nación. Está regida por la Ley N° 346 de Ciudadanía y Naturalización (1869) y su decreto reglamentario N° 3213/1984 (actualizado por última vez en 2004). Bajo este marco existen dos vías de acceso: la carta de ciudadanía, habitualmente conocida como "naturalización", y la opción.
 
@@ -38,17 +41,13 @@ Corresponde a personas nacidas en el extranjero que son hijas de padre o madre a
 
 La distinción entre ambas vías es relevante para el análisis: la carta de ciudadanía refleja trayectorias de inmigración y residencia en el país, mientras que la opción expresa vínculos de filiación con la población argentina, incluida la emigrada.
 
-
 ## Pregunta de interés
-
 
 > ¿Desde qué países de origen y por qué vía de acceso (carta de ciudadanía u opción) se nacionalizaron las personas en Argentina entre 2013 y 2024, y cómo evolucionaron los principales orígenes en ese período?
 
 La pregunta busca identificar qué países concentran las nacionalizaciones, si esa composición difiere según la vía de acceso y cómo cambiaron a lo largo del tiempo los cinco principales países de origen.
 
-
- 
-## Fuente de datos 
+## Fuente de datos
 
 Se utiliza la base *Población nacionalizada en Argentina*, elaborada por la Dirección Nacional de Población a partir de los registros administrativos del RENAPER y publicada en el portal de datos abiertos del Estado nacional:
 
@@ -59,27 +58,25 @@ La base contiene la cantidad de personas que obtuvieron la nacionalidad argentin
 
 El registro se apoya en el proceso de digitalización de la identificación de personas iniciado con el Decreto N° 1501/2009, que estableció la emisión digital del DNI para ciudadanos nacionales y extranjeros (Resoluciones RENAPER N° 1800/2009 y N° 585/2012).
 
-
 ### Unidad de análisis y periodo
 
 Personas nacionalizadas que realizaron, entre el 1 de enero de 2013 y el 31 de diciembre de 2024, el trámite de su primer DNI como argentinas ante el RENAPER.
 
-
 ### Alcances y limitaciones
-
 
 - **Cobertura del registro.** Solo se contabilizan personas que tramitaron su primer DNI digital como argentinas. Quedan excluidas quienes tienen documentos confeccionados manualmente (Libreta Cívica, Libreta de Enrolamiento, DNI tapa verde o bordó) y quienes tramitaron el DNI digital fuera del período.
 - **Fecha de referencia.** El año corresponde al trámite del primer DNI, no a la fecha de otorgamiento de la nacionalidad. Puede haber un desfasaje entre ambos momentos, especialmente en la vía judicial.
 - **Nacionalizaciones sin DNI.** Las personas que obtuvieron la nacionalidad pero no tramitaron su primer DNI argentino no aparecen en la base.
 - **Período analizado.** Aunque la base llega hasta el 20 de agosto de 2025, se excluye ese año por contener datos parciales, para trabajar solo con años completos y comparables.
 
-
-
 ## Modelo de visualización de Ben Fry
-
 
 Ben Fry (2008) propone siete etapas para desarrollar una visualización de datos: obtener, estructurar, filtrar, explorar, representar, refinar e interactuar. Este trabajo desarrolla las seis primeras; la última (*Interact*) queda fuera porque el producto final es una visualización estática.
 
+
+### 1. Obtener (*Acquire*)
+
+El dataset se obtiene desde el portal de datos abierto a través de la URL del recurso: <https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv> 
 
 
 ```{r}
@@ -87,24 +84,24 @@ Ben Fry (2008) propone siete etapas para desarrollar una visualización de datos
 #| message: false
 #| warning: false
 
-# paquetes de trabajo
+# prepararo paquetes de trabajo
 
 library(tidyverse)
 library(janitor)
-library(patchwork)
 library(scales)
 library(knitr)
 library(tidytext)
 ```
-### 1. Obtener (*Acquire*)
-
-El dataset se obtiene desde el portal de datos abierto a través de la URL del recurso
 
 ```{r}
 #| code-overflow: wrap
 #| 
-renaper <- 
-  "https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv"
+
+renaper <- paste0(
+  "https://datosabiertos.renaper.gob.ar/",
+  "Cantidad_de_tramites_de_DNI_argentino_",
+  "por_nacionalidad_pais_anio.csv"
+)
 
 pob_nacionalizada <- read_csv(renaper, show_col_types = FALSE)
 
@@ -112,10 +109,7 @@ pob_nacionalizada <- read_csv(renaper, show_col_types = FALSE)
 glimpse(pob_nacionalizada)
 ```
 
-
-La base cuenta con 1.974 observaciones y 4 variables: país de nacimiento  (`pais_nac`), vía de acceso a la nacionalidad (`Tipo_nacionalidad`) con las categorías CARTA y OPCION, año de trámite del primer DNI (`anio`) y cantidad de personas nacionalizadas  (`cantidad`). Cada fila corresponde a una combinación de país, vía de acceso y año; las combinaciones sin casos no figuran en la base.
-
-
+La base cuenta con 1.974 observaciones y 4 variables: país de nacimiento (`pais_nac`), vía de acceso a la nacionalidad (`Tipo_nacionalidad`) con las categorías CARTA y OPCION, año de trámite del primer DNI (`anio`) y cantidad de personas nacionalizadas (`cantidad`). Cada fila corresponde a una combinación de país, vía de acceso y año; las combinaciones sin casos no figuran en la base.
 
 ### 2. Estructurar (*Parse*)
 
@@ -141,10 +135,7 @@ nac <- pob_nacionalizada |>
   )
 ```
 
-
-
 ### 3. Filtrar (*Filter*)
-
 
 Se restringe el período a los años completos (2013–2024), excluyendo 2025 por contener datos solo hasta el 20 de agosto.
 
@@ -156,7 +147,6 @@ nac_periodo <- nac |>
 ```
 
 Para poder comparar los perfiles de origen según la vía de acceso, la selección se realiza por separado para carta de ciudadanía y para opción. Para cada vía se identifican los diez países con mayor cantidad de personas nacionalizadas en el período.
-
 
 ```{r}
 #| label: filter-datos-a
@@ -174,7 +164,6 @@ kable(datos_a)
 ```
 
 Para la serie temporal se toman los cinco primeros países de cada vía, y se arma su evolución anual. Los años sin registros se completan con cero para que las líneas no omitan esos años.
-
 
 ```{r}
 #| label: filter-datos-b
@@ -200,11 +189,9 @@ datos_b <- nac_periodo |>
 
 Como resultado de esta etapa se obtienen dos conjuntos de datos: el primero reúne a los diez principales países de cada vía de acceso con su total del período; el segundo contiene la serie anual de los cinco principales países de cada vía.
 
-
 ### 4. Explorar (*Mine*)
 
 En esta etapa se calculan medidas para identificar patrones antes de graficar: el volumen de cada vía de acceso, su evolución anual, el grado de concentración en pocos países, la coincidencia entre los rankings de ambas vías y la evolución de los principales países.
-
 
 #### ¿Cuánto pesa cada vía en el total?
 
@@ -224,7 +211,6 @@ total <- totales_tipo |>
 kable(total)
 ```
 
-
 Las dos vías tienen volúmenes comparables: la carta de ciudadanía reúne 59.019 personas (54,2%) y la opción 49.899 (45,8%).
 
 #### ¿Cómo evolucionó cada vía año a año?
@@ -242,12 +228,9 @@ nac_periodo |>
   kable()
 ```
 
-
 Entre 2013 y 2019 ambas vías se mantienen estables, en torno a 4.000–4.800 personas por año. En 2020 caen a alrededor de un tercio, en coincidencia con la pandemia. A partir de 2022 la recuperación es marcada: en 2024 la carta de ciudadanía prácticamente duplica su nivel de 2013 (9.248 frente a 4.655), mientras que la opción crece un 34%.
 
-
 #### ¿Qué tan concentradas están las nacionalizaciones en cada vía?
-
 
 ```{r}
 #| label: mine-concentracion
@@ -266,7 +249,6 @@ datos_a |>
 
 La carta de ciudadanía está más concentrada: sus diez principales países reúnen el 84,5% del total de la vía, y los tres primeros casi la mitad. En opción, los diez principales reúnen el 72,6%.El porcentaje se calcula sobre el total de cada vía, con todos los países. La última fila de cada vía indica cuánto concentran sus diez principales países
 
-
 #### ¿Qué países aparecen en las dos vías?
 
 ```{r}
@@ -280,10 +262,10 @@ datos_a |>
 
 Solo cuatro países figuran entre los diez principales de ambas vías: Bolivia, Chile, Paraguay y Venezuela, todos sudamericanos. El resto de los rankings es distinto: en carta predominan países latinoamericanos y del Caribe, y en opción aparecen España, Estados Unidos, México, Italia e Israel.
 
-
-
 #### ¿Cómo evolucionaron los cinco principales de cada vía?
 
+
+- Variaciones del primer al ultimo año de análisis 
 
 ```{r}
 #| label: mine-variacion
@@ -297,7 +279,11 @@ datos_b |>
   ) |>
   mutate(var_pct = round((a2024 - a2013) / a2013 * 100, 1)) |> 
   kable()
+```
 
+- Año de mayor impacto por país 
+
+```{r}
 # Año de máximo de cada país
 datos_b |>
   group_by(tipo, pais) |>
@@ -308,83 +294,104 @@ datos_b |>
 
 En carta de ciudadanía, Venezuela pasa de 19 personas en 2013 a 4.411 en 2024, casi la mitad de todas las cartas de ese año. En cambio, Perú y Paraguay disminuyen (-26% y -49%) y Bolivia se mantiene estable. En opción, Estados Unidos y Chile más que duplican sus valores, mientras que España, aunque sigue primera, desciende un 21% respecto de 2013.
 
-
 #### Hallazgos principales:
 
-- Las dos vías de acceso tienen un peso similar, pero perfiles de origen distintos: solo cuatro países coinciden en sus rankings.
+- Las dos vías de acceso a la nacionalidad argentina tienen un peso similar, pero perfiles de origen distintos: solo cuatro países coinciden en sus rankings.
 
-- La carta de ciudadanía se concentra en países latinoamericanos y del Caribe; la opción incluye además países con presencia de población argentina emigrada.
+- La nacionalización por carta de ciudadanía se concentra en países latinoamericanos y del Caribe; mientras que la nacionalización por opción incluye además países con presencia de población argentina emigrada.
 
 - La pandemia produjo una caída abrupta en 2020, seguida de un crecimiento sostenido hasta 2024.
 
-- El crecimiento reciente de la carta de ciudadanía se explica principalmente por la migración desde Venezuela, que reemplaza a Perú y Bolivia como principal origen.
-
+- El crecimiento reciente de la carta de ciudadanía se explica principalmente por la migración desde Venezuela, que reemplaza a Perú y Bolivia como principal país de origen.
 
 ### 5. Representar (*Represent*)
 
-La visualización combina dos gráficos, cada uno construido a partir de uno de los conjuntos de datos definidos en la etapa de filtrado.
-
+La visualización se compone de tres gráficos construidos a partir de los dos conjuntos de datos definidos en la etapa de filtrado. El primero, elaborado con `datos_a`, compara los diez principales países de nacimiento en cada vía de acceso a la nacionalidad. Los otros dos, elaborados con `datos_b`, muestran la evolución anual de los cinco principales países, uno para la carta de ciudadanía y otro para la opción.
 
 #### Diez principales países por vía de acceso (`datos_a`)
 
-
-Para comparar el total de personas nacionalizadas entre países se eligen barras horizontales, separadas por vía de acceso. La longitud de la barra es la codificación más precisa para comparar cantidades, y la orientación horizontal permite leer nombres de países largos. 
-
+Para comparar el total de personas nacionalizadas entre países se elige un gráfico de barras horizontales, facetado por vía de acceso a la nacionalidad. La longitud de la barra es la codificación más precisa para comparar cantidades, y la orientación horizontal facilita la lectura de nombres de países extensos. Ambos paneles comparten la escala de cantidades, lo que permite comparar los volúmenes entre vías de acceso.
 
 ```{r}
 #| label: represent-barras
+#| fig-width: 10
+#| fig-height: 5
 
 ggplot(datos_a, aes(total, pais)) +
   geom_col() +
   facet_wrap(~ tipo, scales = "free_y") +
   labs(
-    title = 
+    title = "Personas nacionalizadas según país de nacimiento y tipo de nacionalización. Argentina, 2013–2024",
+      x = "Personas nacionalizadas",
+      y =  "País de nacimiento",
+    caption = "Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."
   )
 ```
 
-
-
 #### Evolución anual de los cinco principales países (`datos_b`)
 
-
-Para mostrar la evolución en el tiempo se elabora un gráfico de líneas con puntos para cada vía de acceso: la línea muestra la tendencia y los puntos señalan el valor de cada año, lo que facilita identificar cambios puntuales. Se limita a los cinco principales países de cada vía porque con más series el gráfico se vuelve difícil de leer. 
-
+Para mostrar la evolución en el tiempo se elabora un gráfico de líneas con puntos para cada vía de acceso a la nacionalidad: la línea muestra la tendencia y los puntos señalan el valor de cada año, lo que facilita identificar cambios puntuales. Se limita a los cinco principales países de cada vía porque con más series el gráfico se vuelve difícil de leer.
 
 A diferencia de las barras, donde los totales de ambas vías son comparables, en la serie los volúmenes anuales difieren mucho (Venezuela supera las 4.000 personas en carta de ciudadanía, mientras que en opción ningún país alcanza las 1.400). Por eso cada vía tiene su propia escala, y los valores se comparan dentro de cada vía y no entre ellas.
 
-
 ```{r}
-#| label: represent-serie
+#| label: represent-serie1
+#| fig-width: 10
+#| fig-height: 5
+
 datos_b |> 
   filter(tipo == "Carta de ciudadanía") |> 
-  ggplot(aes(anio, cantidad, color = pais)) +
-  geom_line() +
-  geom_point()
+  ggplot(aes(as.factor(anio), 
+             cantidad, 
+             group = pais,
+             color = pais)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+    labs(
+  title = "Personas nacionalizadas por carta de ciudadanía según país de nacimiento",
+  subtitle = "Cinco principales países. Argentina, 2013–2024",
+      y = "Personas nacionalizadas",
+      x =  "Año de trámite primer DNI",
+    color = "País de nacimiento",
+    caption = "Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."
+  )
 
 ```
 
 ```{r}
+#| label: represent-serie2
+#| fig-width: 10
+#| fig-height: 5
+
 datos_b |> 
   filter(tipo == "Opción") |> 
-  ggplot(aes(anio, cantidad, color = pais)) +
-  geom_line() +
-  geom_point()
+  ggplot(aes(as.factor(anio), 
+             cantidad, 
+             group = pais,
+             color = pais)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "Personas nacionalizadas por opción según país de nacimiento",
+    subtitle = "Cinco principales países. Argentina, 2013–2024",
+      y = "Personas nacionalizadas",
+      x =  "Año de trámite primer DNI",
+    color = "País de nacimiento",
+    caption = "Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."
+  )
 ```
 
-
-
-Estas versiones base permiten identificar los aspectos a mejorar en la etapa siguiente: barras sin ordenar, años con decimales en el eje, leyendas extensas y ausencia de títulos y fuente.
-
+Estas versiones base permiten identificar los aspectos a mejorar en la etapa siguiente: themes, paleta de colores, escalas de los ejes, entre otros.  
 
 ### 6. Refinar (*Refine*)
 
-
-
-A partir de las versiones base se mejora la presentación de ambos gráficos: se ordenan las barras de mayor a menor y se agregan sus valores; se ajustan las marcas del eje horizontal de la serie para mostrar solo años enteros; se reemplaza la leyenda por etiquetas directas al final de cada línea; se sombrea el año 2020 para señalar la pandemia; se usa separador de miles en formato local; se reduce la grilla y se agregan títulos y fuente. Finalmente, los cuatro gráficos se combinan en una única composición, con una columna por vía de acceso.
+#### Diez principales países por vía de acceso (`datos_a`)
 
 
 ```{r}
 #| label: refine-barras
+#| fig-width: 10
+#| fig-height: 5
 
 datos_a |>
   mutate(pais = reorder_within(pais, total, tipo)) |>
@@ -396,19 +403,124 @@ datos_a |>
     size = 3) +
   scale_y_reordered() +
   scale_fill_manual(values = c("#003049", "#669BBC"), guide = "none") +
-  scale_color_manual(values = c("white", "#003049"), guide = "none") +
+  scale_color_manual(values = c("white", "black"), guide = "none") +
   facet_wrap(~ tipo, scales = "free_y") +
   labs(
-    title = "Diez principales países por vía de acceso, 2013–2024",
-    x = NULL, y = NULL
-  ) + 
+    title = "Personas nacionalizadas según país de nacimiento y tipo de nacionalización. Argentina, 2013–2024",
+      x = "Personas nacionalizadas",
+      y =  "País de nacimiento",
+    caption = "Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."
+  ) +
   theme_bw()
 ```
 
+
+#### Evolución anual de los cinco principales países (`datos_b`) 
+
+
+
+```{r}
+#| label: serie-ciudadania
+#| fig-width: 10
+#| fig-height: 5
+
+datos_b |> 
+  filter(tipo == "Carta de ciudadanía") |> 
+  ggplot(aes(as.factor(anio), 
+             cantidad, 
+             group = pais,
+             color = pais)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(0, 5000)) + 
+  scale_color_brewer(palette = "Set1") +
+    labs(
+  title = "Personas nacionalizadas por carta de ciudadanía según país de nacimiento",
+  subtitle = "Cinco principales países. Argentina, 2013–2024",
+      y = "Personas nacionalizadas",
+      x =  "Año de trámite primer DNI",
+    color = "País de nacimiento",
+    caption = "Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos."
+  ) +
+  theme_bw() +
+    theme(
+    legend.position = "bottom"
+  )
+
+```
+
+
+
+```{r}
+#| label: serie-opcion
+#| fig-width: 10
+#| fig-height: 5
+
+datos_b |> 
+  filter(tipo == "Opción") |> 
+  ggplot(aes(as.factor(anio), 
+             cantidad, 
+             group = pais,
+             color = pais)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(0, 1500)) + 
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Personas nacionalizadas por opción según país de nacimiento",
+    subtitle = "Cinco principales países. Argentina, 2013–2024",
+      y = "Personas nacionalizadas",
+      x =  "Año de trámite primer DNI",
+    color = "País de nacimiento",
+    caption = "Fuente: elaboración propia con base en datos del Registro Nacional de las Personas (RENAPER), portal de datos abiertos.") +
+  theme_bw() +
+    theme(
+    legend.position = "bottom"
+  )
+```
 
 
 
 ## Conclusiones
 
 
+El análisis visual permite responder la pregunta planteada: entre 2013 y 2024, las personas que se nacionalizaron en Argentina provienen de orígenes distintos según la vía de acceso a la nacionalidad, y la composición de esos orígenes cambió de forma marcada a partir de la pandemia de COVID-19.
+
+En el período analizado, 108.918 personas realizaron su primer DNI como argentinas. Ambas vías tienen un peso similar en ese total, pero sus perfiles de origen difieren: solo Bolivia, Chile, Paraguay y Venezuela figuran entre los diez principales países de las dos vías. La carta de ciudadanía se concentra en países latinoamericanos y del Caribe, con Venezuela, Perú y Bolivia a la cabeza, mientras que la opción, encabezada por España y Estados Unidos, presenta una distribución más diversificada, con países como México, Italia e Israel.
+
+En cuanto a la evolución temporal, ambas vías se mantienen estables entre 2013 y 2019, caen abruptamente en 2020, probablemente por la interrupción de trámites presenciales durante la pandemia, y se recuperan con fuerza a partir de 2021. Ese crecimiento reciente se explica principalmente por Venezuela en la carta de ciudadanía, que pasa de 19 personas en 2013 a 4.411 en 2024, mientras disminuyen orígenes tradicionales como Perú y Paraguay. En la opción crecen Estados Unidos y Chile, y España, aunque se mantiene como principal origen, desciende.
+
+Estas diferencias son consistentes con la naturaleza de cada vía: la carta de ciudadanía refleja trayectorias de inmigración y residencia en el país, mientras que la opción expresa en mayor medida vínculos de filiación con la población argentina, incluida la emigrada. Sin embargo, la presencia de países limítrofes en ambas vías muestra que la distinción no es tajante y que la movilidad regional también se expresa a través de la opción. Al mismo tiempo, los cambios observados recuerdan que los fenómenos migratorios son dinámicos y responden a contextos internacionales demográficos, sociales, económicos y políticos, como lo muestran el crecimiento de la población venezolana, la presencia de orígenes como Senegal o Rusia y los destinos de la emigración argentina que se reflejan en la opción. Comprender la evolución de las nacionalizaciones requiere, por lo tanto, situarla en esos contextos.
+
+
+
 ## Referencias
+
+### Bibliografía
+
+Fry, B. (2008). *Visualizing Data: Exploring and Explaining Data with the Processing Environment*. O'Reilly Media.
+
+### Normativa
+
+Ley N° 346 de Ciudadanía y Naturalización. (1869). República Argentina.
+
+Decreto N° 3213/1984. Reglamentación de la Ley N° 346. República Argentina.
+
+Decreto N° 1501/2009. República Argentina.
+
+Registro Nacional de las Personas. Resolución N° 1800/2009.
+
+Registro Nacional de las Personas. Resolución N° 585/2012.
+
+### Fuentes de datos
+
+Registro Nacional de las Personas (RENAPER). (s. f.). *Cantidad de trámites de DNI argentino por nacionalidad, país y año* [Conjunto de datos]. Portal de datos abiertos del RENAPER. Recuperado el 20 de octubre de 2026, de https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv
+
+
+Registro Nacional de las Personas (RENAPER). (s. f.). *Estadística de población*. https://www.argentina.gob.ar/interior/renaper/estadistica-de-poblacion
+
+
+### Software
+
+R Core Team. (2025). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. https://www.R-project.org/
+
