@@ -73,11 +73,9 @@ Personas nacionalizadas que realizaron, entre el 1 de enero de 2013 y el 31 de d
 
 Ben Fry (2008) propone siete etapas para desarrollar una visualización de datos: obtener, estructurar, filtrar, explorar, representar, refinar e interactuar. Este trabajo desarrolla las seis primeras; la última (*Interact*) queda fuera porque el producto final es una visualización estática.
 
-
 ### 1. Obtener (*Acquire*)
 
-El dataset se obtiene desde el portal de datos abierto a través de la URL del recurso: <https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv> 
-
+El dataset se obtiene desde el portal de datos abierto a través de la URL del recurso: <https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv>
 
 ```{r}
 #| label: setup
@@ -264,8 +262,7 @@ Solo cuatro países figuran entre los diez principales de ambas vías: Bolivia, 
 
 #### ¿Cómo evolucionaron los cinco principales de cada vía?
 
-
-- Variaciones del primer al ultimo año de análisis 
+- Variaciones del primer al ultimo año de análisis
 
 ```{r}
 #| label: mine-variacion
@@ -281,7 +278,7 @@ datos_b |>
   kable()
 ```
 
-- Año de mayor impacto por país 
+- Año de mayor impacto por país
 
 ```{r}
 # Año de máximo de cada país
@@ -381,12 +378,11 @@ datos_b |>
   )
 ```
 
-Estas versiones base permiten identificar los aspectos a mejorar en la etapa siguiente: themes, paleta de colores, escalas de los ejes, entre otros.  
+Estas versiones base permiten identificar los aspectos a mejorar en la etapa siguiente: themes, paleta de colores, escalas de los ejes, entre otros.
 
 ### 6. Refinar (*Refine*)
 
 #### Diez principales países por vía de acceso (`datos_a`)
-
 
 ```{r}
 #| label: refine-barras
@@ -414,10 +410,7 @@ datos_a |>
   theme_bw()
 ```
 
-
-#### Evolución anual de los cinco principales países (`datos_b`) 
-
-
+#### Evolución anual de los cinco principales países (`datos_b`)
 
 ```{r}
 #| label: serie-ciudadania
@@ -449,8 +442,6 @@ datos_b |>
 
 ```
 
-
-
 ```{r}
 #| label: serie-opcion
 #| fig-width: 10
@@ -479,10 +470,7 @@ datos_b |>
   )
 ```
 
-
-
 ## Conclusiones
-
 
 El análisis visual permite responder la pregunta planteada: entre 2013 y 2024, las personas que se nacionalizaron en Argentina provienen de orígenes distintos según la vía de acceso a la nacionalidad, y la composición de esos orígenes cambió de forma marcada a partir de la pandemia de COVID-19.
 
@@ -491,8 +479,6 @@ En el período analizado, 108.918 personas realizaron su primer DNI como argenti
 En cuanto a la evolución temporal, ambas vías se mantienen estables entre 2013 y 2019, caen abruptamente en 2020, probablemente por la interrupción de trámites presenciales durante la pandemia, y se recuperan con fuerza a partir de 2021. Ese crecimiento reciente se explica principalmente por Venezuela en la carta de ciudadanía, que pasa de 19 personas en 2013 a 4.411 en 2024, mientras disminuyen orígenes tradicionales como Perú y Paraguay. En la opción crecen Estados Unidos y Chile, y España, aunque se mantiene como principal origen, desciende.
 
 Estas diferencias son consistentes con la naturaleza de cada vía: la carta de ciudadanía refleja trayectorias de inmigración y residencia en el país, mientras que la opción expresa en mayor medida vínculos de filiación con la población argentina, incluida la emigrada. Sin embargo, la presencia de países limítrofes en ambas vías muestra que la distinción no es tajante y que la movilidad regional también se expresa a través de la opción. Al mismo tiempo, los cambios observados recuerdan que los fenómenos migratorios son dinámicos y responden a contextos internacionales demográficos, sociales, económicos y políticos, como lo muestran el crecimiento de la población venezolana, la presencia de orígenes como Senegal o Rusia y los destinos de la emigración argentina que se reflejan en la opción. Comprender la evolución de las nacionalizaciones requiere, por lo tanto, situarla en esos contextos.
-
-
 
 ## Referencias
 
@@ -514,13 +500,10 @@ Registro Nacional de las Personas. Resolución N° 585/2012.
 
 ### Fuentes de datos
 
-Registro Nacional de las Personas (RENAPER). (s. f.). *Cantidad de trámites de DNI argentino por nacionalidad, país y año* [Conjunto de datos]. Portal de datos abiertos del RENAPER. Recuperado el 20 de octubre de 2026, de https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv
-
+Registro Nacional de las Personas (RENAPER). (s. f.). *Cantidad de trámites de DNI argentino por nacionalidad, país y año* \[Conjunto de datos\]. Portal de datos abiertos del RENAPER. Recuperado el 20 de octubre de 2026, de https://datosabiertos.renaper.gob.ar/Cantidad_de_tramites_de_DNI_argentino_por_nacionalidad_pais_anio.csv
 
 Registro Nacional de las Personas (RENAPER). (s. f.). *Estadística de población*. https://www.argentina.gob.ar/interior/renaper/estadistica-de-poblacion
-
 
 ### Software
 
 R Core Team. (2025). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. https://www.R-project.org/
-
