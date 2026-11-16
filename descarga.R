@@ -12,18 +12,30 @@ renaper <- paste0(
 
 pob_nacionalizada <- read_csv(renaper, show_col_types = FALSE)
 
-desagregado <- read_csv("https://datosabiertos.renaper.gob.ar/Cantidad_de_personas_nacionalizada_carta_de_ciudadania_sexo_edad_actual_y_edad_tramite.csv",
+
+desagregado_carta <- read_csv("https://datosabiertos.renaper.gob.ar/Cantidad_de_personas_nacionalizada_carta_de_ciudadania_sexo_edad_actual_y_edad_tramite.csv",
          show_col_types = FALSE)
+
+desagregado_opcion <- read_csv("https://datosabiertos.renaper.gob.ar/Cantidad_de_personas_nacionalizadas_opcion_sexo_edad_actual_y_edad_tramite.csv",
+                        show_col_types = FALSE)
+
 
 write
 
 ## Lectura de composición del  dataset
 glimpse(pob_nacionalizada)
 
-write.csv(pob_nacionalizada, 
-          "data/base_nacionalizaciones.csv",
+write.csv(desagregado_carta, 
+          "data/desagregado_carta.csv",
           row.names = FALSE,
           fileEncoding = "UTF-8")
+
+
+write.csv(desagregado_opcion, 
+          "data/desagregado_opcion.csv",
+          row.names = FALSE,
+          fileEncoding = "UTF-8")
+
 
 write.csv(desagregado, 
           "data/base_desagregado.csv",
