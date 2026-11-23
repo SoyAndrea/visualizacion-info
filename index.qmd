@@ -9,7 +9,7 @@ page-layout: full
 
 ::: {.portada-intro}
 
-<p class="portada-etiqueta">Andrea Gómez Vargas</p>
+<p class="portada-etiqueta">Andrea Gomez Vargas</p>
 
 # NUEVOS ARGENTINOS
 

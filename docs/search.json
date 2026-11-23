@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "NUEVOS ARGENTINOS",
-    "section": "",
-    "text": "Andrea Gómez Vargas\n\n\nNUEVOS ARGENTINOS\n\nUn análisis de las nacionalizaciones en Argentina, 2013–2025\n\n\n\n\n\n\n\nTrabajo Práctico 1\nVisualización estática en R\n\nExplorar\n\n\n\n\n\nTrabajo Práctico 2\nDashboard en PowerBI\n\nExplorar\n\n\n\n\n\nTrabajo final\nData Storytelling con Flourish\n\nPróximamente"
-  },
-  {
     "objectID": "tp2.html#pregunta-de-interés",
     "href": "tp2.html#pregunta-de-interés",
     "title": "Trabajo Practico 2: Dashboard interactivo",
@@ -39,7 +32,14 @@
     "href": "tp2.html#dashboard-interactivo",
     "title": "Trabajo Practico 2: Dashboard interactivo",
     "section": "Dashboard interactivo",
-    "text": "Dashboard interactivo\nEl tablero fue desarrollado en Power BI y se organiza en dos páginas que permiten explorar distintas dimensiones de las nacionalizaciones en Argentina.\n\nPágina 1. Orígenes y evolución\nEsta página recupera las visualizaciones estáticas de la primera entrega e incorpora un segmentador de año que permite actualizar los gráficos según el período seleccionado. Se presentan los principales países de nacimiento por vía de nacionalización, su evolución temporal y un conjunto de indicadores de síntesis que responden dinámicamente a los filtros aplicados.\n\n\n\nPágina 2. Perfil sociodemográfico\nEsta página amplía el análisis mediante la incorporación de información sociodemográfica. Presenta la distribución por sexo y grupos de edad al momento del trámite del primer DNI argentino, permitiendo comparar los perfiles según la vía de nacionalización. Los resultados corresponden al total de personas nacionalizadas que tramitaron su primer DNI como argentinas durante el período 2013–2025.\n\n\n\n\n\n\n\nNota\n\n\n\nEl dashboard interactivo fue desarrollado en Power BI Desktop y el archivo .pbix fue entregado a través del Campus Virtual de la materia."
+    "text": "Dashboard interactivo\nEl tablero fue desarrollado en Power BI y se organiza en dos páginas que permiten explorar distintas dimensiones de las nacionalizaciones en Argentina.\n\nPágina 1. Orígenes y evolución\nEsta página recupera las visualizaciones estáticas de la primera entrega e incorpora un segmentador de año que permite actualizar los gráficos según el período seleccionado. Se presentan los principales países de nacimiento por vía de nacionalización, su evolución temporal y un conjunto de indicadores de síntesis que responden dinámicamente a los filtros aplicados.\n\n\n\nPágina 2. Perfil sociodemográfico\nEsta página amplía el análisis mediante la incorporación de información sociodemográfica. Presenta la distribución por sexo y grupos de edad al momento del trámite del primer DNI argentino, permitiendo comparar los perfiles según la vía de nacionalización. Los resultados corresponden al total de personas nacionalizadas que tramitaron su primer DNI como argentinas durante el período 2013–2025.\n\n\n\n\n\n\n\nNota\n\n\n\nEl dashboard interactivo fue desarrollado en Power BI Desktop en un archivo .pbix."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NUEVOS ARGENTINOS",
+    "section": "",
+    "text": "Andrea Gomez Vargas\n\n\nNUEVOS ARGENTINOS\n\nUn análisis de las nacionalizaciones en Argentina, 2013–2025\n\n\n\n\n\n\n\nTrabajo Práctico 1\nVisualización estática en R\n\nExplorar\n\n\n\n\n\nTrabajo Práctico 2\nDashboard en PowerBI\n\nExplorar\n\n\n\n\n\nTrabajo final\nData Storytelling con Flourish\n\nPróximamente"
   },
   {
     "objectID": "tp1.html#introducción-la-nacionalización-en-argentina",

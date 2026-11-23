@@ -15,6 +15,9 @@ website:
       - icon: github
         href: https://github.com/SoyAndrea/visualizacion-info
         aria-label: GitHub
+      - icon: globe
+        href: https://soyandrea.github.io/
+        aria-label: Sitio web personal
 
     right:
       - text: "Inicio"
