@@ -13,8 +13,6 @@ format:
     number-sections: false
     theme: cosmo
     code-fold: true
-    code-summary: "Mostrar código"
-    code-tools: true
   typst:
     toc: true
     number-sections: false
@@ -26,14 +24,11 @@ format:
 editor: visual
 ---
 
-
 {{< pagebreak >}}
-
-
 
 # Nuevos argentinos: un análisis de las nacionalizaciones en Argentina, años 2013–2025
 
-Este segundo trabajo práctico da continuidad al análisis de las nacionalizaciones en Argentina desarrollado en la [primera entrega](https://soyandrea.github.io/visualizacion-info/), centrada en la visualización estática de datos. En esta oportunidad, se amplía el análisis mediante la incorporación de información sociodemográfica y el desarrollo de un tablero interactivo en Power BI que permite explorar los resultados desde distintas dimensiones.
+Este segundo trabajo práctico da continuidad al análisis de las nacionalizaciones en Argentina desarrollado en la [primera entrega](https://soyandrea.github.io/visualizacion-info/tp1.html), centrada en la visualización estática de datos. En esta oportunidad, se amplía el análisis mediante la incorporación de información sociodemográfica y el desarrollo de un tablero interactivo en Power BI que permite explorar los resultados desde distintas dimensiones.
 
 ## Pregunta de interés
 
@@ -64,8 +59,6 @@ En la primera entrega se delimitó el análisis al período 2013–2024, con el 
 
 Esta decisión permite trabajar con una cobertura temporal equivalente entre las fuentes, aunque debe considerarse que los registros correspondientes a 2025 son parciales.
 
-
-
 ## Alcances y limitaciones
 
 - **Cobertura del registro:** Solo se contabilizan personas que tramitaron su primer DNI digital como argentinas. Quedan excluidas quienes tienen documentos confeccionados manualmente (Libreta Cívica, Libreta de Enrolamiento, DNI tapa verde o bordó) y quienes tramitaron el DNI digital fuera del período.
@@ -95,3 +88,9 @@ Esta página recupera las visualizaciones estáticas de la primera entrega e inc
 Esta página amplía el análisis mediante la incorporación de información sociodemográfica. Presenta la distribución por sexo y grupos de edad al momento del trámite del primer DNI argentino, permitiendo comparar los perfiles según la vía de nacionalización. Los resultados corresponden al total de personas nacionalizadas que tramitaron su primer DNI como argentinas durante el período 2013–2025.
 
 ![](images/hoja2.png)
+
+
+::: {.callout-note}
+El dashboard interactivo fue desarrollado en Power BI Desktop en un archivo `.pbix`.
+:::
+

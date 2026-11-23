@@ -1,24 +1,15 @@
-# Visualización de Información 2026
 
-Repositorio de trabajos prácticos de la materia **Visualización de Información**, correspondiente a la Maestría en Generación y Análisis de Información Estadística de la Universidad Nacional de Tres de Febrero (UNTREF).
+# Visualización de la Información
 
-## Trabajos prácticos
+Trabajos desarrollados durante el segundo semestre de 2026 en el marco de la Maestría en Generación y Análisis de Información Estadística (UNTREF), en la materia a cargo de **Juan Manuel Fernández y Franco Chappe**.
 
-### TP1. El modelo de visualización de Ben Fry
+**Autora:** Andrea Gómez Vargas
 
-**Nuevos argentinos: nacionalizaciones en Argentina (2013–2024)**
+🌐 [Visitar el sitio web](https://soyandrea.github.io/visualizacion-info/)
 
-Análisis y visualización de datos sobre personas que obtuvieron la nacionalidad argentina y realizaron su primer trámite de DNI, a partir de información publicada por el Registro Nacional de las Personas (RENAPER).
 
-El trabajo aplica las etapas del modelo de visualización de Ben Fry para explorar la evolución de los trámites de nacionalización según el año, el tipo de nacionalidad y el país de nacimiento.
+## Sobre el proyecto
 
-## Herramientas
-- R
-- ggplot2
-- Quarto
-- GitHub Pages
+Para las entregas de la asignatura elegí analizar las nacionalizaciones en Argentina a partir de datos abiertos del Registro Nacional de las Personas (RENAPER).
 
-## Autora
-
-[**Andrea Gómez Vargas**](https://soyandrea.github.io/)  
-
+Bajo el título *Nuevos argentinos*, el proyecto explora diferentes enfoques y herramientas de visualización de datos, desde gráficos estáticos hasta tableros interactivos y narrativas visuales.
