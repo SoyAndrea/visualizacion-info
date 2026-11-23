@@ -1,0 +1,375 @@
+
+/* ==========================================
+   VISUALIZACIÓN DE LA INFORMACIÓN
+   Identidad visual · UNTREF 2026
+   ========================================== */
+
+/* ==========================================
+   1. TIPOGRAFÍA Y PALETA
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --violeta: #604EC2;
+  --violeta-oscuro: #4936A2;
+  --lila: #E2D9F1;
+  --fondo: #F8F6F2;
+  --texto: #241B42;
+  --texto-secundario: #625B6A;
+  --blanco: #FFFFFF;
+}
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--texto);
+
+  background:
+    linear-gradient(
+      rgba(248, 246, 242, 0.35),
+      rgba(248, 246, 242, 0.35)
+    ),
+    url("images/sol.png");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--texto);
+  font-weight: 700;
+}
+
+p, li, a, button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* ==========================================
+   2. BARRA DE NAVEGACIÓN
+   ========================================== */
+
+.navbar {
+  background-color: var(--violeta) !important;
+  border-bottom: none;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-nav .nav-link {
+  color: var(--blanco) !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+  color: #E8DFFF !important;
+}
+
+/* Íconos de GitHub y búsqueda */
+
+.navbar .bi,
+.navbar .fa,
+.navbar .fab,
+.navbar .fas {
+  color: var(--blanco);
+}
+
+/* Menú desplegable */
+
+.navbar .dropdown-menu {
+  background-color: var(--blanco);
+  border: 1px solid var(--lila);
+  border-radius: 8px;
+}
+
+.navbar .dropdown-item {
+  color: var(--texto) !important;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: #F1EDF7;
+  color: var(--violeta) !important;
+}
+
+
+/* ==========================================
+   3. ENLACES Y BOTONES
+   ========================================== */
+
+a {
+  color: var(--violeta);
+}
+
+a:hover {
+  color: var(--violeta-oscuro);
+}
+
+.btn-primary,
+.boton-entrega {
+  background-color: var(--violeta);
+  color: var(--blanco) !important;
+  border-color: var(--violeta);
+}
+
+.btn-primary:hover,
+.boton-entrega:hover {
+  background-color: var(--violeta-oscuro);
+  color: var(--blanco) !important;
+}
+
+.boton-entrega {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+
+/* ==========================================
+   4. PORTADA GENERAL
+   ========================================== */
+
+/* Permitir que el contenido ocupe el ancho disponible */
+
+body:has(.portada) #quarto-content,
+body:has(.portada) main.content {
+  width: 100%;
+  max-width: none;
+}
+
+/* Contenedor principal */
+
+.portada {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 2.5rem;
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   5. ENCABEZADO DE PORTADA
+   ========================================== */
+
+.portada-intro {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 2rem;
+  padding: 1.8rem 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(2px);
+  border-radius: 16px;
+}
+
+.portada-etiqueta {
+  color: var(--violeta);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portada-intro h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--texto);
+  margin: 0.5rem 0 1rem;
+}
+
+.portada-subtitulo {
+  color: var(--texto-secundario);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+
+/* ==========================================
+   6. GRILLA DE ENTREGAS
+   ========================================== */
+
+.grid-entregas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Evitar que los elementos de Quarto
+   compriman el ancho de las tarjetas */
+
+.grid-entregas > * {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   7. TARJETAS
+   ========================================== */
+
+.entrega {
+  width: 100%;
+  min-width: 0;
+  min-height: 300px;
+
+  padding: 2rem 1.5rem;
+
+  background-color: var(--blanco);
+  border: 1px solid var(--lila);
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+
+  box-sizing: border-box;
+}
+
+.entrega h3 {
+  color: var(--violeta);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.entrega p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--texto-secundario);
+  margin: 0;
+}
+
+/* Tarjetas visuales */
+
+.entrega-visual {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Logos */
+
+.logo-herramienta {
+  display: block;
+  width: auto;
+  max-width: 130px;
+  max-height: 80px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Ajustes para imágenes generadas por Quarto */
+
+.entrega .quarto-figure,
+.entrega figure {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.entrega .quarto-figure img,
+.entrega figure img {
+  max-height: 75px;
+  width: auto;
+}
+
+/* Botones alineados */
+
+.entrega .boton-entrega {
+  margin-top: auto;
+}
+
+
+/* ==========================================
+   8. FOOTER
+   ========================================== */
+
+.nav-footer {
+  background-color: var(--violeta);
+  color: var(--blanco);
+  border-top: none;
+  padding: 1rem 0;
+}
+
+.nav-footer,
+.nav-footer a,
+.nav-footer-center {
+  color: var(--blanco) !important;
+}
+
+
+/* ==========================================
+   9. RESPONSIVE
+   ========================================== */
+
+/* Tablets */
+
+@media (max-width: 1000px) {
+
+  .grid-entregas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portada {
+    padding: 1.5rem;
+  }
+
+  .portada-intro h1 {
+    font-size: 3rem;
+  }
+}
+
+/* Celulares */
+
+@media (max-width: 650px) {
+
+  .grid-entregas {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .portada {
+    padding: 1rem;
+  }
+
+  .portada-intro {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+    background-position: center;
+  }
+
+  .portada-intro h1 {
+    font-size: 2.2rem;
+  }
+
+  .portada-subtitulo {
+    font-size: 1rem;
+  }
+
+  .entrega {
+    min-height: 240px;
+    padding: 1.5rem;
+  }
+
+  .entrega h3 {
+    font-size: 1.2rem;
+  }
+}

@@ -1,22 +1,42 @@
+
 project:
   type: website
   output-dir: docs
 
 website:
   title: "Visualización de la Información"
-  
+  site-url: https://soyandrea.github.io/visualizacion-info/
+
   navbar:
-    background: "#604ec2"
+    background: "#604EC2"
+    foreground: "#FFFFFF"
+
     left:
-      - text: "Trabajo práctico 1"
-        href: index.qmd
-    right:
       - icon: github
         href: https://github.com/SoyAndrea/visualizacion-info
         aria-label: GitHub
 
+    right:
+      - text: "Inicio"
+        href: index.qmd
+
+      - text: "Entregas"
+        menu:
+          - text: "TP1 · Visualización estática"
+            href: tp1.qmd
+          - text: "TP2 · Visualización interactiva"
+            href: tp2.qmd
+         # - text: "Trabajo final · Flourish"
+         #  href: final.qmd
+
+  page-footer:
+    center: "Maestría en Generación y Análisis de Información Estadística · UNTREF · 2026"
+
 format:
   html:
     theme: cosmo
+    css: styles.css
     toc: true
-    code-overflow: wrap
+    toc-location: right
+    linkcolor: "#604EC2"
+    smooth-scroll: true
